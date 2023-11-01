@@ -1,9 +1,10 @@
 import "./App.css";
-import {GalleryItem, ImageGallery} from './components';
+import DropGallery from "./components/DropGallery/DropGallery";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 const App = () => {
   return (
     <div className="container app__section">
-      <ImageGallery />
+      <DropGallery />
     </div>
   );
 };
