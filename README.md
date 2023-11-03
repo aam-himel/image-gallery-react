@@ -43,3 +43,12 @@ Provide us with the following:
 
 ## Note:
 Feel free to showcase your creativity and React JS skills in the implementation of the image gallery. We look forward to seeing your work!
+
+
+
+# Some Resources
+
+- https://codesandbox.io/s/dndkit-sortable-image-grid-py6ve?file=/src/App.jsx
+- https://codesandbox.io/examples/package/@dnd-kit/sortable
+- https://master--5fc05e08a4a65d0021ae0bf2.chromatic.com/?path=/docs/presets-sortable-grid--removable-items
+- https://docs.dndkit.com/presets/sortable/usesortable#sorting-strategy
