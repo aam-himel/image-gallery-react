@@ -1,9 +1,10 @@
-import "./App.css";
-import DropGallery from "./components/DropGallery/DropGallery";
+import { useState } from "react";
+// import "./App.css";
+import UploadGallery from "./components/UploadGallery";
 const App = () => {
   return (
     <div className="container app__section">
-      <DropGallery />
+      <UploadGallery />
     </div>
   );
 };
