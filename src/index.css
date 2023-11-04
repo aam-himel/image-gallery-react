@@ -1,4 +1,3 @@
-
 /* variables */
 :root {
   --header-height: 72px;
@@ -30,7 +29,8 @@ img {
   max-width: 100%;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
@@ -46,7 +46,6 @@ body {
 }
 
 .container {
-  max-width: var(--site-max-width);
+  max-width: 800px;
   margin: 0 auto;
 }
-

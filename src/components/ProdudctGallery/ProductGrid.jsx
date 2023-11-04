@@ -1,16 +1,13 @@
 import React from "react";
 
-export function Grid({ children, columns }) {
+export function ProductGrid({ children, columns }) {
   return (
     <div
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${columns}, 1fr)`,
-        gridGap: 20,
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 10,
-        paddingBottom: 10,
+        gridGap: 10,
+        padding: 10,
         background: "#fff",
       }}
     >

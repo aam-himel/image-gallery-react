@@ -1,0 +1,30 @@
+.photo {
+    border-radius: 6px;
+    border: 1px solid gray;
+}
+
+.photo:hover {
+    cursor: pointer;
+}
+
+.photo:hover .checkOverlay {
+    height: 100%;
+    width: 100%;
+    /* background-color: rgba(0, 0, 21, 0.467); */
+}
+
+.photo .checkOverlay .checkboxSec {
+    display: none;
+}
+
+.photo:hover .checkOverlay .checkboxSec {
+    display: block;
+}
+
+.photo:hover .checkOverlay .checkboxSec input {
+    z-index: 100;
+}
+
+.checkboxSec {
+    padding: 1rem 1rem;
+}

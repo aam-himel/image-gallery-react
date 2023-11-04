@@ -1,6 +1,8 @@
-.app__section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.gridContainer {
+  margin-top: 4rem;
+}
+
+.gridContainer img {
+  max-width: 100%;
+  object-fit: cover;
 }
