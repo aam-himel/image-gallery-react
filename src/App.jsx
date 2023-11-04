@@ -1,33 +1,59 @@
-import { useState } from "react";
-import DemoGallery from "./components/DemoGallery";
-// import "./App.css";
+import React, {useState} from 'react';
+import {
+  DndContext, 
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
 
-import {DndContext} from '@dnd-kit/core'
 
-import Draggable from "./components/Draggable";
-import Droppable from "./components/Droppable";
+import SortableItem from './components/SortableItem'
 
-const App = () => {
-  const [isDropped, setIsDropped] = useState(false)
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  rectSortingStrategy
+} from '@dnd-kit/sortable';
 
-  const draggableMarkup = (
-    <Draggable>Drag Me!</Draggable>
-  )
-  return (
-    <DndContext onDragEnd={handleDragEnd}>
-      {!isDropped ? draggableMarkup : undefined}
-      <Droppable>
-        {isDropped ? draggableMarkup : 'Drop here'}
-      </Droppable>
-    </DndContext>
+function App() {
+  const [items, setItems] = useState([1, 2, 3]);
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
   );
 
+  return (
+    <DndContext 
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext 
+        items={items}
+        strategy={rectSortingStrategy}
+      >
+        {items.map(id => <SortableItem key={id} id={id} />)}
+      </SortableContext>
+    </DndContext>
+  );
+  
   function handleDragEnd(event) {
-    console.log(event)
-    if (event.over && event.over.id === 'droppable') {
-      setIsDropped(true);
+    const {active, over} = event;
+    
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+        
+        return arrayMove(items, oldIndex, newIndex);
+      });
     }
   }
-};
+}
 
 export default App;
