@@ -16,10 +16,10 @@ export const SortablePhoto = (props) => {
     
   } = sortable;
 
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-  
   };
 
   return (

@@ -4,6 +4,7 @@ import {
   closestCenter,
   MouseSensor,
   TouchSensor,
+  PointerSensor,
   DragOverlay,
   useSensor,
   useSensors,
@@ -22,7 +23,12 @@ import photos from "./photos.json";
 const UploadGallery = () => {
   const [items, setItems] = useState(photos);
   const [activeId, setActiveId] = useState(null);
-  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
+  const sensors = useSensors(useSensor(PointerSensor, {
+    activationConstraint: {
+      distance: 8,
+    },
+  }), useSensor(TouchSensor));
+  const [selectedIds, setSelectedIds] = useState([]);
 
   return (
     <DndContext
@@ -35,7 +41,7 @@ const UploadGallery = () => {
       <SortableContext items={items} strategy={rectSortingStrategy}>
         <Grid columns={4}>
           {items.map((url, index) => (
-            <SortablePhoto key={url} url={url} index={index} />
+            <SortablePhoto key={url} url={url} index={index} handleSelectId={handleSelectId} />
           ))}
         </Grid>
       </SortableContext>
@@ -48,6 +54,9 @@ const UploadGallery = () => {
     </DndContext>
   );
 
+  function handleSelectId(index) {
+    console.log("selected ids", index);
+  }
   function handleDragStart(event) {
     setActiveId(event.active.id);
   }
@@ -55,7 +64,7 @@ const UploadGallery = () => {
   function handleDragEnd(event) {
     const { active, over } = event;
 
-    if (active.id !== over.id) {
+    if (active && over && active.id !== over.id) {
       setItems((items) => {
         const oldIndex = items.indexOf(active.id);
         const newIndex = items.indexOf(over.id);

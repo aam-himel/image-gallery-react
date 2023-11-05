@@ -14,12 +14,12 @@
 }
 
 .photo .checkOverlay .checkboxSec {
-    display: none;
-}
-
-.photo:hover .checkOverlay .checkboxSec {
     display: block;
 }
+
+/* .photo:hover .checkOverlay .checkboxSec {
+    display: block;
+} */
 
 .photo:hover .checkOverlay .checkboxSec input {
     z-index: 100;
