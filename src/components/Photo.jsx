@@ -14,23 +14,20 @@ export const Photo = forwardRef(
       backgroundColor: "grey",
       ...style,
     };
-    console.log(props)
     const handleSelectedId = () => {
       handleSelectId(index);
-      console.log(index);
     };
 
     return (
-      <div
-        ref={ref}
-        {...props}
-        onMouseDown={() => handleSelectedId()}
-        style={inlineStyles}
-        className="photo"
-      >
+      <div ref={ref} {...props} style={inlineStyles} className="photo">
         <div className="checkOverlay">
           <div className="checkboxSec">
-            <input type="checkbox" name="checkbox" id={index}  />
+            <input
+              type="checkbox"
+              name="checkbox"
+              id={index}
+              onMouseDown={() => handleSelectedId()}
+            />
           </div>
         </div>
       </div>

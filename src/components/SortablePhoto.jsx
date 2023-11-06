@@ -1,6 +1,6 @@
 import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
-import { CSS, } from "@dnd-kit/utilities";
+import { CSS } from "@dnd-kit/utilities";
 
 import { Photo } from "./Photo";
 
@@ -13,9 +13,7 @@ export const SortablePhoto = (props) => {
     setNodeRef,
     transform,
     transition,
-    
   } = sortable;
-
 
   const style = {
     transform: CSS.Transform.toString(transform),
