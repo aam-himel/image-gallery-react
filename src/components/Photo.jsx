@@ -1,12 +1,18 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import "./Photo.css";
 export const Photo = forwardRef(
   ({ url, index, faded, style, handleSelectId, checkedItems,...props }, ref) => {
+    const [selected, setSelected] = useState(false);
+    
 
-    const [selected, setSelected] = useState(false)
+    console.log("selected",selected)
 
+    const handleSelectedId = () => {
+      handleSelectId(index);
+    };
 
-      const inlineStyles = {
+    const inlineStyles = {
+      position:'relative',
       opacity: faded ? "0.2" : "1",
       transformOrigin: "0 0",
       height: index === 0 ? 323 : 150,
@@ -20,23 +26,9 @@ export const Photo = forwardRef(
       ...style,
     };
 
-    const hoverStyles = {
-      backgroundColor: "rgba(0, 0, 21, 0.467)",
-      border: "1px solid blue"
-    };
-
-  
-
-    const itemSelected = () => {
-      checkedItems.includes(index) ? setSelected(true) : setSelected(false);
-    }
-
-    const handleSelectedId = () => {
-      handleSelectId(index);
-    };
-
     return (
       <div ref={ref} {...props} style={inlineStyles} className="photo">
+        <div className="selectedItem">{selected ? '02' : 'not selected'}</div>
         <div className="checkOverlay">
           <div className="checkboxSec">
             <input

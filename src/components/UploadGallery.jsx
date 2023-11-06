@@ -3,7 +3,6 @@ import "./UploadGallery.css";
 import {
   DndContext,
   closestCenter,
-  MouseSensor,
   TouchSensor,
   PointerSensor,
   DragOverlay,
@@ -20,12 +19,15 @@ import { Grid } from "./Grid";
 import { SortablePhoto } from "./SortablePhoto";
 import { Photo } from "./Photo";
 import photos from "./photos.json";
-
+import UploadImg from "../assets/upload.svg";
 const UploadGallery = ({ setCheckdItem, checkedItems }) => {
   const [items, setItems] = useState(photos);
   const [activeId, setActiveId] = useState(null);
   const [currentSelection, setCurrentSelection] = useState(-1);
-
+  const [idExists, setIdExists] = useState(null);
+  function handleChange(e) {
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -34,7 +36,6 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
     }),
     useSensor(TouchSensor)
   );
-  const [selectedIds, setSelectedIds] = useState([]);
   return (
     <DndContext
       sensors={sensors}
@@ -44,17 +45,21 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
       onDragCancel={handleDragCancel}
     >
       <div className="gallery__top">
-        {checkedItems.length ? <div className="header">
-          <div className="header__left">
-            <input type="checkbox" checked />
-            <h4 className="">{checkedItems.length} items selected</h4>
+        {checkedItems.length ? (
+          <div className="header">
+            <div className="header__left">
+              <input type="checkbox" defaultChecked />
+              <h4 className="">{checkedItems.length} items selected</h4>
+            </div>
+            <button onClick={handleDelete}>Delete</button>
           </div>
-          <button onClick={handleDelete}>Delete</button>
-        </div> : <div className="header">
-          <div className="header__left">
-            <h4 className="">Gallery</h4>
+        ) : (
+          <div className="header">
+            <div className="header__left">
+              <h4 className="">Gallery</h4>
+            </div>
           </div>
-        </div>}
+        )}
       </div>
       <SortableContext items={items} strategy={rectSortingStrategy}>
         <Grid columns={4}>
@@ -65,9 +70,23 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
               index={index}
               handleSelectId={handleSelectId}
               checkedItems={checkedItems}
-              currentSelection={currentSelection}
             />
           ))}
+          <div>
+            <div className="addImg">
+              <div className="addImgContent">
+                <h3>Add Image</h3>
+                <img src={UploadImg} alt="img placeholder" />
+              </div>
+              <input
+                type="file"
+                className="customFileInputnput"
+                id="fileInput"
+                onChange={handleChange}
+                multiple
+              />
+            </div>
+          </div>
         </Grid>
       </SortableContext>
 
@@ -79,14 +98,25 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
     </DndContext>
   );
 
+  function handleChange(e) {
+    const newImages = [...e.target.files];
+    const tempImages = [];
+    if (e.target.files) {
+      newImages.map((image, index) =>
+        tempImages.push(URL.createObjectURL(image))
+      );
+    }
+    setItems((prevImages) => [...prevImages, ...tempImages]);
+  }
   function handleSelectId(index) {
-    console.log("selected id", index);
     if (checkedItems.includes(index)) {
       setCheckdItem(checkedItems.filter((id) => id !== index));
-      setCurrentSelection(-1)
+      setCurrentSelection(-1);
+      setIdExists(index)
     } else {
       setCheckdItem([...checkedItems, index]);
-      setCurrentSelection(index)
+      setCurrentSelection(index);
+      setIdExists(-1);
     }
   }
 
@@ -97,7 +127,6 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
       );
       setItems(newItems);
       setCheckdItem([]);
-      console.log(newItems);
     }
   }
 

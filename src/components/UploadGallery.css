@@ -1,28 +1,84 @@
 .grid__container {
-    margin-top: 4rem;
-    padding: 1rem;
-  }
-  
-  .grid__container img {
-    max-width: 100%;
-    object-fit: cover;
-  }
-  
-  .gallery__top {
-    padding: 1rem;
-    background: #fff;
-    border-bottom: 1px solid rgba(11, 11, 11, 0.484);
-  }
-  
-  .header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: space-between;
-  }
-  
-  .header__left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  margin-top: 4rem;
+  padding: 1rem;
+}
+
+.grid__container img {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.gallery__top {
+  padding: 1rem;
+  background: #fff;
+  border-bottom: 1px solid rgba(11, 11, 11, 0.484);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.addImg {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 3px dotted black;
+  min-height: 150px;
+}
+
+.addImg img {
+  height: 24px;
+  width: 24px;
+}
+
+.addImgContent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.file-input-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* Style the custom file input */
+.customFileInputnput {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0;
+}
+
+/* Style the custom file label */
+.custom-file-label {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* Hover effect for the custom file label */
+.custom-file-label:hover {
+  background-color: #0056b3;
+}
