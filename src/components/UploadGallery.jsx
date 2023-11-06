@@ -24,6 +24,8 @@ import photos from "./photos.json";
 const UploadGallery = ({ setCheckdItem, checkedItems }) => {
   const [items, setItems] = useState(photos);
   const [activeId, setActiveId] = useState(null);
+  const [currentSelection, setCurrentSelection] = useState(-1);
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -42,13 +44,17 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
       onDragCancel={handleDragCancel}
     >
       <div className="gallery__top">
-        <div className="header">
+        {checkedItems.length ? <div className="header">
           <div className="header__left">
-            <input type="checkbox" name="" id="" />
+            <input type="checkbox" checked />
             <h4 className="">{checkedItems.length} items selected</h4>
           </div>
           <button onClick={handleDelete}>Delete</button>
-        </div>
+        </div> : <div className="header">
+          <div className="header__left">
+            <h4 className="">Gallery</h4>
+          </div>
+        </div>}
       </div>
       <SortableContext items={items} strategy={rectSortingStrategy}>
         <Grid columns={4}>
@@ -58,6 +64,8 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
               url={url}
               index={index}
               handleSelectId={handleSelectId}
+              checkedItems={checkedItems}
+              currentSelection={currentSelection}
             />
           ))}
         </Grid>
@@ -75,8 +83,10 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
     console.log("selected id", index);
     if (checkedItems.includes(index)) {
       setCheckdItem(checkedItems.filter((id) => id !== index));
+      setCurrentSelection(-1)
     } else {
       setCheckdItem([...checkedItems, index]);
+      setCurrentSelection(index)
     }
   }
 

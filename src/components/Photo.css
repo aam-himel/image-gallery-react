@@ -10,16 +10,17 @@
 .photo:hover .checkOverlay {
     height: 100%;
     width: 100%;
-    /* background-color: rgba(0, 0, 21, 0.467); */
+    z-index: 100;
+
 }
 
 .photo .checkOverlay .checkboxSec {
-    display: block;
+    display: none;
 }
 
-/* .photo:hover .checkOverlay .checkboxSec {
+.photo:hover .checkOverlay .checkboxSec {
     display: block;
-} */
+}
 
 .photo:hover .checkOverlay .checkboxSec input {
     z-index: 100;
