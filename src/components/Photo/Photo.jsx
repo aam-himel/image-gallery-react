@@ -1,18 +1,18 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import "./Photo.css";
 export const Photo = forwardRef(
-  ({ url, index, faded, style, handleSelectId, checkedItems,...props }, ref) => {
+  (
+    { url, index, faded, style, handleSelectId, checkedItems, ...props },
+    ref
+  ) => {
     const [selected, setSelected] = useState(false);
-    
-
-    console.log("selected",selected)
-
     const handleSelectedId = () => {
+      setSelected(!selected); // Toggle the selected state
       handleSelectId(index);
     };
 
     const inlineStyles = {
-      position:'relative',
+      position: "relative",
       opacity: faded ? "0.2" : "1",
       transformOrigin: "0 0",
       height: index === 0 ? 323 : 150,
@@ -22,20 +22,23 @@ export const Photo = forwardRef(
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundColor: "grey",
-      border: selected ? "5px solid blue" : "none",
+      border: selected ? "5px solid #a7f3d0" : "2px solid #ecfeff",
+      boxShadow: "box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
+
       ...style,
     };
 
     return (
       <div ref={ref} {...props} style={inlineStyles} className="photo">
-        <div className="selectedItem">{selected ? '02' : 'not selected'}</div>
+        {selected ? <div className="selectedItem">{index + 1}</div> : null}
+
         <div className="checkOverlay">
           <div className="checkboxSec">
             <input
               type="checkbox"
               name="checkbox"
               id={index}
-              onMouseDown={() => handleSelectedId()}
+              onChange={handleSelectedId}
             />
           </div>
         </div>

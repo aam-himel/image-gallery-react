@@ -82,3 +82,19 @@
 .custom-file-label:hover {
   background-color: #0056b3;
 }
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.deleteBtn {
+  background-color: #ec4899;
+  margin: 0;
+  padding: .5rem .75rem;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}

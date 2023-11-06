@@ -1,7 +1,7 @@
 import { useState } from "react";
+import UploadGallery from "./components/UploadGallery/UploadGallery";
 import "./App.css";
-import UploadGallery from "./components/UploadGallery";
-import ProductGallery from "./components/ProdudctGallery/ProductGallery";
+
 const App = () => {
   const [checkedItems, setCheckedItems] = useState([]);
 

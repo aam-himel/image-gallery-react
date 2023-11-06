@@ -2,6 +2,7 @@
     border-radius: 6px;
     border: 1px solid gray;
     position: relative;
+    transition: all .1s ease-in;
 }
 
 .photo:hover {
@@ -36,9 +37,15 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: blue;
+    background-color: #1e3a8a;
+    color: white;
+    font-weight: bold;
     padding: 1px;
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 10px;
+}
+
+input[type=checkbox]{
+    accent-color:  #f8497a;
 }

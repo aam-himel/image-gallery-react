@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./UploadGallery.css";
 import {
   DndContext,
   closestCenter,
@@ -15,16 +14,16 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 
-import { Grid } from "./Grid";
-import { SortablePhoto } from "./SortablePhoto";
-import { Photo } from "./Photo";
-import photos from "./photos.json";
-import UploadImg from "../assets/upload.svg";
+import { Grid } from "../Grid";
+import { SortablePhoto } from "../SortablePhoto";
+import { Photo } from "../Photo/Photo";
+import productPhotos from "../../data/productPhotos.json";
+import UploadImg from "../../assets/upload.svg";
+import "./UploadGallery.css";
+
 const UploadGallery = ({ setCheckdItem, checkedItems }) => {
-  const [items, setItems] = useState(photos);
+  const [items, setItems] = useState(productPhotos);
   const [activeId, setActiveId] = useState(null);
-  const [currentSelection, setCurrentSelection] = useState(-1);
-  const [idExists, setIdExists] = useState(null);
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
@@ -51,7 +50,9 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
               <input type="checkbox" defaultChecked />
               <h4 className="">{checkedItems.length} items selected</h4>
             </div>
-            <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleDelete} className="deleteBtn">
+              Delete
+            </button>
           </div>
         ) : (
           <div className="header">
@@ -111,12 +112,8 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
   function handleSelectId(index) {
     if (checkedItems.includes(index)) {
       setCheckdItem(checkedItems.filter((id) => id !== index));
-      setCurrentSelection(-1);
-      setIdExists(index)
     } else {
       setCheckdItem([...checkedItems, index]);
-      setCurrentSelection(index);
-      setIdExists(-1);
     }
   }
 
@@ -144,7 +141,6 @@ const UploadGallery = ({ setCheckdItem, checkedItems }) => {
         return arrayMove(items, oldIndex, newIndex);
       });
     }
-
     setActiveId(null);
   }
 
